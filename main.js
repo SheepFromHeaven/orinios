@@ -11,7 +11,7 @@ const copyToClipboard = str => {
 const map = L.map('map', {
   maxBounds: [[85, -180], [-85, 180]],
   maxBoundsViscosity: 0.8,
-}).setView([0, 0], 3);
+}).setView([0, 0], 2);
 
 L.tileLayer('./images/map/{z}/{x}/{y}.png', {
   maxZoom: 5,
