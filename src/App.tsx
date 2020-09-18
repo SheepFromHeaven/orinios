@@ -28,10 +28,10 @@ class App extends Component {
         <LayersControl position="bottomright">
           {overlayMaps.map(this.createLayerGroup)}
         </LayersControl>
-        <Polygon positions={[
+        {/* <Polygon positions={[
           [0,0],
           [20,20]
-        ]}></Polygon>
+        ]}></Polygon> */}
 
         {/* <CopyPositionMarker></CopyPositionMarker> */}
       </Map>
