@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { LayerGroup, Map, TileLayer, LayersControl, Tooltip } from 'react-leaflet';
+import { LayerGroup, Map, TileLayer, LayersControl, Tooltip, Polygon } from 'react-leaflet';
 import overlayMaps from './data/overlayMaps';
 import 'leaflet/dist/leaflet.css';
 import { VillageMarker, CopyPositionMarker }  from './Markers';
@@ -18,8 +18,6 @@ class App extends Component {
   }
 
   render(): any {
-    console.log(VillageMarker);
-    
     return <div className="App">
       <Map className="Map" center={[0, 0]} maxBounds={[[85, -180], [-85, 180]]} maxBoundsViscosity={.8} zoom={2}>
         <TileLayer
@@ -30,6 +28,10 @@ class App extends Component {
         <LayersControl position="bottomright">
           {overlayMaps.map(this.createLayerGroup)}
         </LayersControl>
+        <Polygon positions={[
+          [0,0],
+          [20,20]
+        ]}></Polygon>
 
         {/* <CopyPositionMarker></CopyPositionMarker> */}
       </Map>

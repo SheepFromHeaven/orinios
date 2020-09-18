@@ -7,10 +7,9 @@ export class CopyPositionMarker extends Component {
   ref: any = createRef();
 
   icon = Leaflet.icon({
-    iconUrl: 'images/hut.png',
+    iconUrl: 'images/map-pin.png',
     iconSize: [30, 30],
-    iconAnchor: [15, 15],
-    popupAnchor: [0, -15],
+    iconAnchor: [15, 30],
   });
 
 
@@ -63,6 +62,21 @@ export const CityMarker = (props: MarkerProps) => {
       iconAnchor: [17.5, 35],
       popupAnchor: [0, -32],
       tooltipAnchor: [0, -32],
+    }),
+  };
+
+  return <Marker {...propsWithIcon}>{props.children}</Marker>;
+}
+
+export const ObeliskMarker = (props: MarkerProps) => {
+  const propsWithIcon = {
+    ...props,
+    icon: Leaflet.icon({
+      iconUrl: 'images/obelisk.png',
+      iconSize: [30, 30],
+      iconAnchor: [15, 30],
+      popupAnchor: [0, -25],
+      tooltipAnchor: [0, -25],
     }),
   };
 

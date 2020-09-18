@@ -1,0 +1,23 @@
+name: Build
+
+on: push
+
+jobs:
+  comment:
+    name: Update github pages
+    if: "!contains(github.event.head_commit.message, '[ci-build]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: npm install
+      - run: npm run build
+      - uses: EndBug/add-and-commit@v4 # You can change this to use a specific version
+        with:
+          add: 'build'
+          message: '[ci-build] Update pages'
+        env:
+          # This is necessary in order to push a commit to the repo
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
