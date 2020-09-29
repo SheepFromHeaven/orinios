@@ -1,8 +1,9 @@
-import { VillageMarker, TownMarker, CityMarker, ObeliskMarker } from './../Markers';
+import { VillageMarker, TownMarker, CityMarker, ObeliskMarker, TowerMarker } from './../Markers';
 import cities from './markers/cities';
 import locations from './markers/locations';
 import towns from './markers/towns';
 import villages from './markers/villages';
+import fortifications from './markers/fortifications';
 
 export default [
   {
@@ -24,5 +25,10 @@ export default [
     name: 'Locations',
     markers: locations,
     component: ObeliskMarker,
+  },
+  {
+    name: 'Fortifications',
+    markers: fortifications,
+    component: TowerMarker,
   },
 ]

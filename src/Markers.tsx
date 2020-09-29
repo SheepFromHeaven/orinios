@@ -1,9 +1,9 @@
 import React, { Component, createRef } from 'react';
 import { Marker, MarkerProps } from 'react-leaflet';
-import Leaflet, { LatLng } from 'leaflet';
+import Leaflet, { LatLng, LatLngExpression } from 'leaflet';
 import { copyToClipboard } from './copyToClipboard';
 
-export class CopyPositionMarker extends Component {
+export class CopyPositionMarker extends Component<{format: string, position: LatLngExpression, ondrop?: Function}> {
   ref: any = createRef();
 
   icon = Leaflet.icon({
@@ -14,11 +14,11 @@ export class CopyPositionMarker extends Component {
 
 
   copyPositionToClipboard(position: LatLng) {
-    copyToClipboard(`lat: ${position.lat},\nlng: ${position.lng},`)
+    copyToClipboard(this.props.format.replace('$lat', position.lat.toString()).replace('$lng', position.lng.toString()))
   }
   
   render() {
-    return <Marker icon={this.icon} ref={this.ref} position={[0, 0]} ondragend={() => { this.copyPositionToClipboard(this.ref.current.leafletElement.getLatLng()) }} draggable></Marker>
+    return <Marker icon={this.icon} ref={this.ref} position={this.props.position} ondragend={() => { (this.copyPositionToClipboard)(this.ref.current.leafletElement.getLatLng()) }} draggable></Marker>
     ;
   }
 }
@@ -73,6 +73,21 @@ export const ObeliskMarker = (props: MarkerProps) => {
     ...props,
     icon: Leaflet.icon({
       iconUrl: 'images/obelisk.png',
+      iconSize: [30, 30],
+      iconAnchor: [15, 30],
+      popupAnchor: [0, -25],
+      tooltipAnchor: [0, -25],
+    }),
+  };
+
+  return <Marker {...propsWithIcon}>{props.children}</Marker>;
+}
+
+export const TowerMarker = (props: MarkerProps) => {
+  const propsWithIcon = {
+    ...props,
+    icon: Leaflet.icon({
+      iconUrl: 'images/tower.png',
       iconSize: [30, 30],
       iconAnchor: [15, 30],
       popupAnchor: [0, -25],
